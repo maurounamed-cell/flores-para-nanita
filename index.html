@@ -8,7 +8,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nanita 🌻</title>
+    <title> Nanita 🌻 </title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -143,6 +143,42 @@ Contáctame:
 
     forcePlay();
   });
+</script>
+
+
+<!-- Botón para mostrar regalo -->
+<button id="btnRegalo" class="btn-regalo">Ver Regalo</button>
+
+<!-- Modal para mostrar carta -->
+<div id="regaloModal" class="modal-regalo">
+  <span class="cerrar">&times;</span>
+  <img src="carta.jpeg" class="modal-contenido" alt="Regalo">
+</div>
+
+<script>
+// --- Lluvia de flores ---
+function lluviaDeFlores() {
+  const flor = document.createElement("img");
+  flor.src = "descarga.png"; // imagen flor
+  flor.classList.add("flor");
+  flor.style.left = Math.random() * window.innerWidth + "px";
+  document.body.appendChild(flor);
+  setTimeout(() => flor.remove(), 6000);
+}
+setInterval(lluviaDeFlores, 500);
+
+// --- Mostrar modal con la carta ---
+const btn = document.getElementById("btnRegalo");
+const modal = document.getElementById("regaloModal");
+const spanCerrar = modal.querySelector(".cerrar");
+
+btn.addEventListener("click", () => {
+  modal.style.display = "block";
+});
+
+spanCerrar.addEventListener("click", () => {
+  modal.style.display = "none";
+});
 </script>
 
 </body></html>
