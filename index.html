@@ -126,102 +126,17 @@ Contáctame:
     
 
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const audio = document.getElementById("bg-music");
-    if (!audio) return;
-    audio.volume = 0.7;
-
-    // Intentar reproducir en bucle hasta que arranque
-    const forcePlay = () => {
-      audio.play().then(() => {
-        console.log("🎶 Música iniciada automáticamente");
-      }).catch(() => {
-        console.log("⏸️ Intento fallido, reintentando...");
-        setTimeout(forcePlay, 1000);
-      });
-    };
-
-    forcePlay();
-  });
-</script>
 
 
-<!-- Botón para mostrar regalo -->
 
 
-<!-- Modal para mostrar carta -->
-<div id="regaloModal" class="modal-regalo">
-  <span class="cerrar">&times;</span>
-  <img src="carta.jpeg" class="modal-contenido" alt="Regalo">
-</div>
-
-<script>
-// --- Lluvia de flores ---
-function lluviaDeFlores() {
-  const flor = document.createElement("img");
-  flor.src = "descarga.png"; // imagen flor
-  flor.classList.add("flor");
-  flor.style.left = Math.random() * window.innerWidth + "px";
-  document.body.appendChild(flor);
-  setTimeout(() => flor.remove(), 6000);
-}
-setInterval(lluviaDeFlores, 500);
-
-// --- Mostrar modal con la carta ---
-const btn = document.getElementById("btnRegalo");
-const modal = document.getElementById("regaloModal");
-const spanCerrar = modal.querySelector(".cerrar");
-
-btn.addEventListener("click", () => {
-  modal.style.display = "block";
-});
-
-spanCerrar.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-</script>
 
 
-<div id="gift-modal" class="modal">
-  <img src="carta.jpeg" alt="Carta" class="modal-content" />
-</div>
 
-
-<script>
-  const giftBtn = document.getElementById('ver-regalo');
-  const modal = document.getElementById('gift-modal');
-  giftBtn.addEventListener('click', () => {
-    modal.style.display = 'flex';
-  });
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
-</script>
 
 
 <!-- Added: ensure existing 'ver-regalo' button opens and clicking anywhere closes -->
-<script>
-(function(){
-  var btn = document.getElementById('ver-regalo');
-  var modal = document.getElementById('regaloModal');
-  if(!btn || !modal) return;
-  btn.addEventListener('click', function(e){
-    e.stopPropagation();
-    modal.style.display = 'block';
-  });
-  // Close modal when clicking anywhere (including image)
-  document.addEventListener('click', function(e){
-    if(modal.style.display === 'block'){
-      // if click target is the button, ignore (already handled)
-      if(btn.contains(e.target)) return;
-      modal.style.display = 'none';
-    }
-  });
-})();
-</script>
+
 
 
 <!-- Overlay para la carta -->
@@ -246,6 +161,46 @@ spanCerrar.addEventListener("click", () => {
       cartaOverlay.classList.remove("show");
     }
   });
+</script>
+
+
+<!-- Modal único para la carta -->
+<div id="carta-overlay">
+  <img src="carta.jpeg" alt="Carta" />
+</div>
+
+<script>
+  const verRegaloBtn = document.getElementById("ver-regalo");
+  const cartaOverlay = document.getElementById("carta-overlay");
+
+  verRegaloBtn.addEventListener("click", () => {
+    cartaOverlay.style.display = "flex";
+  });
+
+  cartaOverlay.addEventListener("click", () => {
+    cartaOverlay.style.display = "none";
+  });
+</script>
+
+
+<script>
+// --- Lluvia de flores ---
+function lluviaDeFlores() {
+  const flor = document.createElement("img");
+  flor.src = "descarga.png"; // imagen flor
+  flor.classList.add("flor");
+  flor.style.left = Math.random() * window.innerWidth + "px";
+  document.body.appendChild(flor);
+  setTimeout(() => flor.remove(), 6000);
+}
+setInterval(lluviaDeFlores, 500);
+
+// --- Forzar música automática ---
+const audio = document.getElementById("bg-music");
+document.addEventListener("click", function forcePlay() {
+  audio.play().catch(() => {});
+  document.removeEventListener("click", forcePlay);
+});
 </script>
 
 </body></html>
