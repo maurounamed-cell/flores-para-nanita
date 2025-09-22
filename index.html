@@ -75,6 +75,7 @@ Contáctame:
     <div id="falling-flower-container"><div class="falling-flower-wrapper" style="left: 70.819vw; animation-duration: 14.9193s;"><div class="falling-flower" style="animation-duration: 4.23901s; width: 16.8753px; height: 16.8753px; filter: blur(1.69914px); opacity: 0.946717;"></div></div></div>
     <div id="particle-container"><div class="particle" style="width: 5.50333px; height: 5.50333px; left: 60.292px; top: 363.859px; animation-delay: 5.46079s;"></div><div class="particle" style="width: 2.76581px; height: 2.76581px; left: 379.898px; top: 156.974px; animation-delay: 0.682137s;"></div></div>
     <h1 class="love-title">Para ti nanita bonita, te quiero mucho muchito muchote 💛</h1>
+<button id="ver-regalo">Ver Regalo</button>
 
     
     <div class="flowers">
@@ -147,7 +148,7 @@ Contáctame:
 
 
 <!-- Botón para mostrar regalo -->
-<button id="btnRegalo" class="btn-regalo">Ver Regalo</button>
+
 
 <!-- Modal para mostrar carta -->
 <div id="regaloModal" class="modal-regalo">
@@ -179,6 +180,72 @@ btn.addEventListener("click", () => {
 spanCerrar.addEventListener("click", () => {
   modal.style.display = "none";
 });
+</script>
+
+
+<div id="gift-modal" class="modal">
+  <img src="carta.jpeg" alt="Carta" class="modal-content" />
+</div>
+
+
+<script>
+  const giftBtn = document.getElementById('ver-regalo');
+  const modal = document.getElementById('gift-modal');
+  giftBtn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+  });
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+</script>
+
+
+<!-- Added: ensure existing 'ver-regalo' button opens and clicking anywhere closes -->
+<script>
+(function(){
+  var btn = document.getElementById('ver-regalo');
+  var modal = document.getElementById('regaloModal');
+  if(!btn || !modal) return;
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    modal.style.display = 'block';
+  });
+  // Close modal when clicking anywhere (including image)
+  document.addEventListener('click', function(e){
+    if(modal.style.display === 'block'){
+      // if click target is the button, ignore (already handled)
+      if(btn.contains(e.target)) return;
+      modal.style.display = 'none';
+    }
+  });
+})();
+</script>
+
+
+<!-- Overlay para la carta -->
+<div id="carta-overlay">
+  <div class="carta-container">
+    <img src="carta.jpeg" alt="Carta" />
+  </div>
+</div>
+
+<script>
+  const verRegaloBtn = document.getElementById("ver-regalo");
+  const cartaOverlay = document.getElementById("carta-overlay");
+
+  verRegaloBtn.addEventListener("click", () => {
+    cartaOverlay.style.display = "flex";
+    cartaOverlay.classList.add("show");
+  });
+
+  cartaOverlay.addEventListener("click", (e) => {
+    if (e.target === cartaOverlay) {
+      cartaOverlay.style.display = "none";
+      cartaOverlay.classList.remove("show");
+    }
+  });
 </script>
 
 </body></html>
